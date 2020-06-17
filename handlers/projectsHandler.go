@@ -6,15 +6,20 @@ import (
 	"os"
 	"log"
 	"encoding/json"
+	"fmt"
 )
 
 var (
-	repos map[string]interface{}
+	repos []interface{}
 )
 
 // ProjectsHandler is responsbile for dealing with projects route
 func ProjectsHandler(w http.ResponseWriter, r *http.Request) {
 	fetchProjects()
+
+	for _, val := range repos {
+		fmt.Println(val)	
+	}
 
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(&repos)
@@ -28,8 +33,13 @@ func fetchProjects() {
 	if err != nil { log.Println("Request Error: Request to fetch github repos failed")}
 	defer res.Body.Close()
 
-	response, _ := ioutil.ReadAll(res.Body)
+	// Read response from response body
+	response, err := ioutil.ReadAll(res.Body)
+	if err != nil {	log.Println("Reader Error: Failed to read bytes from response body.") }
 
 	err = json.Unmarshal(response, &repos)
-	if err != nil { log.Println("JSON Parsing Error: Failed to parse JSON response")}
+	if err != nil { 
+		log.Println("JSON Parsing Error: Failed to parse JSON response")
+		log.Println(err)
+	}
 }
