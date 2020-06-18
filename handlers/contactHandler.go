@@ -15,11 +15,7 @@ type ContactForm struct {
 	Message string `json:"message"`
 }
 
-// ErrorResponse is a placeholder for json error messages
-type ErrorResponse struct {
-	Status 	int `json: "status"`
-	Message string `json: "message"`
-}
+
 
 var (
 	incomingForm ContactForm
@@ -33,6 +29,7 @@ var (
 // ContactHandler is responsible for handling the contact route
 func ContactHandler(w http.ResponseWriter, r *http.Request) {	
 	if r.Method != "POST" {
+		w.Header().Set("Content-type", "application/json")
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		json.NewEncoder(w).Encode(err405)
 
@@ -43,9 +40,10 @@ func ContactHandler(w http.ResponseWriter, r *http.Request) {
 	responseInBytes, _ := ioutil.ReadAll(r.Body)
 	if err := json.Unmarshal(responseInBytes, &incomingForm); err != nil { 
 		log.Println(ErrFailedToParseJSON) 
+
+		w.Header().Set("Content-type", "application/json")
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(err400)
-
 		return
 	} 
 	

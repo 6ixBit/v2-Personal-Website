@@ -11,3 +11,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 
 	
 }
+
+func servePDF () {
+	
+}

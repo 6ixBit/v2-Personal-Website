@@ -15,8 +15,8 @@ var (
 // Projects is a placeholder for response from GitHubs API
 type Projects struct {
 	Name 		string `json: "name"`
-	HTMLURL 	string `json: "html_url"`
-	Description string 	`json: "description"`
+	CloneURL 	string `json: "clone_url"`
+	Description string `json: "description"`
 	Language 	string `json: "language"`
 }
 
@@ -25,6 +25,7 @@ func ProjectsHandler(w http.ResponseWriter, r *http.Request) {
 	fetchProjects()
 
 	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-type", "application/json")
 	json.NewEncoder(w).Encode(&repos)
 }
 
