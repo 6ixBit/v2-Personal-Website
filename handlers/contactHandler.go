@@ -15,13 +15,9 @@ type ContactForm struct {
 	Message string `json:"message"`
 }
 
-
-
 var (
 	incomingForm ContactForm
-)
-
-var (
+	
 	err400 = ErrorResponse{http.StatusBadRequest, "The data received does not match the schema criteria"}
 	err405 = ErrorResponse{http.StatusBadRequest, "That http method is not allowed for this endpoint."}
 )

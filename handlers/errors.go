@@ -19,13 +19,9 @@ type ErrorResponse struct {
 	Message string `json: "message"`
 }
 
-
 func init() {
 	file, err := os.Create("errorLogs.txt")
-
-	if err != nil {
-		log.Println("File Error: Failed to create file to log errors to")
-	}
+	if err != nil { log.Println("File Error: Failed to create file to log errors to") }
 
 	log.SetOutput(file)
 }
