@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/6ixBit/v2-Personal-Website/handlers"
+	mwr "github.com/6ixBit/v2-Personal-Website/middleware"
 	"github.com/joho/godotenv"
 )
 
@@ -13,9 +14,9 @@ func init() {
 }
 
 func main() {
-	http.HandleFunc("/", handlers.HomeHandler)
-	http.HandleFunc("/contact", handlers.ContactHandler)
-	http.HandleFunc("/projects", handlers.ProjectsHandler)
+	http.HandleFunc("/", 		 mwr.LogRequests(handlers.HomeHandler))
+	http.HandleFunc("/contact",  mwr.LogRequests(handlers.ContactHandler))
+	http.HandleFunc("/projects", mwr.LogRequests(handlers.ProjectsHandler))
 
 	startServer()
 }
@@ -30,3 +31,4 @@ func loadEnvFile() {
 		log.Println("Env File Error: Failed to load .env file with environment variable")
 	}
 }
+
