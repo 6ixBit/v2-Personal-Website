@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"fmt"
 
 	"github.com/6ixBit/v2-Personal-Website/handlers"
 	mwr "github.com/6ixBit/v2-Personal-Website/middleware"
@@ -22,7 +23,7 @@ func main() {
 }
 
 func startServer() {
-	log.Println("Server up and running on port 8080..")
+	fmt.Println("Server up and running on port 8080..")
 	http.ListenAndServe(":8080", nil)
 }
 
