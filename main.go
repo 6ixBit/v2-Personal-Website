@@ -14,6 +14,11 @@ func init() {
 	loadEnvFile()
 }
 
+func tt() {
+	fmt.Println("Gimme mioney rn")
+	fmt.Println("we out here")
+}
+
 func main() {
 	http.HandleFunc("/", 		 mwr.LogRequests(handlers.HomeHandler))
 	http.HandleFunc("/contact",  mwr.LogRequests(handlers.ContactHandler))

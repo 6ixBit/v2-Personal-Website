@@ -6,10 +6,16 @@ import (
 	"os"
 	"log"
 	"encoding/json"
+	"time"
+	"fmt"
+
+	cache "github.com/patrickmn/go-cache"
+	// "github.com/prprprus/scheduler"
 )
 
 var (
 	repos []Projects
+	c = cache.New(cache.NoExpiration, 10*time.Minute)
 )
 
 // Projects is a placeholder for response from GitHubs API
@@ -26,6 +32,7 @@ func ProjectsHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-type", "application/json")
+
 	json.NewEncoder(w).Encode(&repos)
 }
 
@@ -42,8 +49,20 @@ func fetchProjects() {
 	if err != nil {	log.Println(ErrFailedToReadFromReader) }
 
 	err = json.Unmarshal(response, &repos)
+	setProjectsInCache(repos)				// TESTING Cache Read and Write
+
 	if err != nil { 
 		log.Println(ErrFailedToParseJSON)
+	}
+}
+
+func setProjectsInCache(r []Projects) {
+	c.Set("projects", &r, cache.NoExpiration)
+	items, exists := c.Get("projects")
+
+	// IF item is found.
+	if exists == true {
+		fmt.Println(items)
 	}
 }
 
