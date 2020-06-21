@@ -24,6 +24,8 @@ func main() {
 	http.HandleFunc("/contact",  mwr.LogRequests(handlers.ContactHandler))
 	http.HandleFunc("/projects", mwr.LogRequests(handlers.ProjectsHandler))
 
+	ScheduleTasks()
+
 	startServer()
 }
 

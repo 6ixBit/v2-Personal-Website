@@ -7,10 +7,8 @@ import (
 	"log"
 	"encoding/json"
 	"time"
-	"fmt"
 
 	cache "github.com/patrickmn/go-cache"
-	// "github.com/prprprus/scheduler"
 )
 
 var (
@@ -26,14 +24,28 @@ type Projects struct {
 	Language 	string `json: "language"`
 }
 
+func init(){
+	fetchProjects()
+}
+
 // ProjectsHandler is responsbile for dealing with projects route
 func ProjectsHandler(w http.ResponseWriter, r *http.Request) {
-	fetchProjects()
+
+	if r.Method != "GET" {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		w.Header().Set("Content-type", "application/json")
+		json.NewEncoder(w).Encode(Err405)
+		
+		return
+	}
 
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-type", "application/json")
-
-	json.NewEncoder(w).Encode(&repos)
+	
+	// Fetch current projects from cache and return response.
+	if projects, exists := c.Get("projects"); exists {
+		json.NewEncoder(w).Encode(&projects)
+	}
 }
 
 // Fetches projects from GitHub API and writes response to addrss of repos global
@@ -49,7 +61,7 @@ func fetchProjects() {
 	if err != nil {	log.Println(ErrFailedToReadFromReader) }
 
 	err = json.Unmarshal(response, &repos)
-	setProjectsInCache(repos)				// TESTING Cache Read and Write
+	setProjectsInCache(repos)			
 
 	if err != nil { 
 		log.Println(ErrFailedToParseJSON)
@@ -58,11 +70,15 @@ func fetchProjects() {
 
 func setProjectsInCache(r []Projects) {
 	c.Set("projects", &r, cache.NoExpiration)
-	items, exists := c.Get("projects")
+	_, exists := c.Get("projects")
 
-	// IF item is found.
-	if exists == true {
-		fmt.Println(items)
+	if exists == false {
+		log.Println("Failed to write to projects to cache")	
 	}
 }
 
+// UpdateProjects will fetch repos, write result to in memory struct, then set that value to cache.
+// Cache read is executed to respond to user request for repos.
+func UpdateProjects() {
+	fetchProjects()
+}

@@ -17,9 +17,6 @@ type ContactForm struct {
 
 var (
 	incomingForm ContactForm
-	
-	err400 = ErrorResponse{http.StatusBadRequest, "The data received does not match the schema criteria"}
-	err405 = ErrorResponse{http.StatusBadRequest, "That http method is not allowed for this endpoint."}
 )
 
 // ContactHandler is responsible for handling the contact route
@@ -27,7 +24,7 @@ func ContactHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		w.Header().Set("Content-type", "application/json")
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		json.NewEncoder(w).Encode(err405)
+		json.NewEncoder(w).Encode(Err405)
 
 		return
 	}
@@ -39,7 +36,7 @@ func ContactHandler(w http.ResponseWriter, r *http.Request) {
 
 		w.Header().Set("Content-type", "application/json")
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(err400)
+		json.NewEncoder(w).Encode(Err400)
 		return
 	} 
 	

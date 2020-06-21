@@ -4,6 +4,7 @@ import (
 	"errors"
 	"os"
 	"log"
+	"net/http"
 )
 
 var (
@@ -11,6 +12,9 @@ var (
 	ErrFailedToParseJSON = errors.New("Failed to parse incoming JSON")
 	ErrFailedToReadFromReader = errors.New("Reader Error: Failed to read bytes from response body.")
 	ErrSendingRequest = errors.New("Request Error: Request to fetch github repos failed")
+
+	Err400 = ErrorResponse{http.StatusBadRequest, "The data received does not match the schema criteria"}
+	Err405 = ErrorResponse{http.StatusBadRequest, "That http method is not allowed for this endpoint."}
 )
 
 // ErrorResponse is a placeholder for json error messages
