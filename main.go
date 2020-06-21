@@ -1,9 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
-	"fmt"
 
 	"github.com/6ixBit/v2-Personal-Website/handlers"
 	mwr "github.com/6ixBit/v2-Personal-Website/middleware"
@@ -14,18 +14,13 @@ func init() {
 	loadEnvFile()
 }
 
-func tt() {
-	fmt.Println("Gimme mioney rn")
-	fmt.Println("we out here")
-}
-
 func main() {
-	http.HandleFunc("/", 		 mwr.LogRequests(handlers.HomeHandler))
-	http.HandleFunc("/contact",  mwr.LogRequests(handlers.ContactHandler))
+	http.HandleFunc("/", mwr.LogRequests(handlers.HomeHandler))
+	http.HandleFunc("/contact", mwr.LogRequests(handlers.ContactHandler))
 	http.HandleFunc("/projects", mwr.LogRequests(handlers.ProjectsHandler))
 
 	ScheduleTasks()
-
+	handlers.FetchProjects()
 	startServer()
 }
 
@@ -39,4 +34,3 @@ func loadEnvFile() {
 		log.Println("Env File Error: Failed to load .env file with environment variable")
 	}
 }
-

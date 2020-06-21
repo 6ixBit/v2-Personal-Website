@@ -24,10 +24,6 @@ type Projects struct {
 	Language 	string `json: "language"`
 }
 
-func init(){
-	fetchProjects()
-}
-
 // ProjectsHandler is responsbile for dealing with projects route
 func ProjectsHandler(w http.ResponseWriter, r *http.Request) {
 
@@ -49,7 +45,7 @@ func ProjectsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // Fetches projects from GitHub API and writes response to addrss of repos global
-func fetchProjects() {
+func FetchProjects() {
 	url, _ := os.LookupEnv("GITHUB_URL")
 
 	res, err := http.Get(url)
@@ -80,5 +76,5 @@ func setProjectsInCache(r []Projects) {
 // UpdateProjects will fetch repos, write result to in memory struct, then set that value to cache.
 // Cache read is executed to respond to user request for repos.
 func UpdateProjects() {
-	fetchProjects()
+	FetchProjects()
 }
