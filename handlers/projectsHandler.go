@@ -34,14 +34,20 @@ func ProjectsHandler(w http.ResponseWriter, r *http.Request) {
 		
 		return
 	}
-
-	w.WriteHeader(http.StatusOK)
-	w.Header().Set("Content-type", "application/json")
 	
 	// Fetch current projects from cache and return response.
 	if projects, exists := c.Get("projects"); exists {
+
+		w.WriteHeader(http.StatusOK)
+		w.Header().Set("Content-type", "application/json")
+
 		json.NewEncoder(w).Encode(&projects)
+	} else {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Header().Set("Content-type", "application/json")
+		json.NewEncoder(w).Encode(Err500)
 	}
+	
 }
 
 // Fetches projects from GitHub API and writes response to addrss of repos global

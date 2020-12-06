@@ -14,7 +14,8 @@ var (
 	ErrSendingRequest = errors.New("Request Error: Request to fetch github repos failed")
 
 	Err400 = ErrorResponse{http.StatusBadRequest, "The data received does not match the schema criteria"}
-	Err405 = ErrorResponse{http.StatusBadRequest, "That http method is not allowed for this endpoint."}
+	Err405 = ErrorResponse{http.StatusMethodNotAllowed, "That http method is not allowed for this endpoint."}
+	Err500 = ErrorResponse{http.StatusInternalServerError, "Oops, looks like we fucked up."}
 )
 
 // ErrorResponse is a placeholder for json error messages
