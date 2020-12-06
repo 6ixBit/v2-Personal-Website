@@ -46,21 +46,19 @@ func ContactHandler(w http.ResponseWriter, r *http.Request) {
 	stub := prepareEmailConfig(incomingForm.Email, incomingForm.Message)
 	stub.SendEmail()
 	w.WriteHeader(http.StatusOK)
+		// Write JSON on success
 } 
 
 func prepareEmailConfig(sender, body string) e.Email {
-	srvAddr, _ := os.LookupEnv("SMTP_SERVER")
-	srvPort, _ := os.LookupEnv("SMTP_PORT")
 	recipient, _ := os.LookupEnv("SMTP_RECIPIENT")
 
-	server := srvAddr + ":" + srvPort
+	var receivers []string
+	receivers = append(receivers, recipient)
 
 	stub := e.Email{
-		server,
-		recipient,
+		receivers,
 		sender,
 		body,
 	}
-
 	return stub
 }
