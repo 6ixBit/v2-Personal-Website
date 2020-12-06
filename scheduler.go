@@ -1,10 +1,11 @@
 package main
 
 import (
-	"log"
+	"log" 
 
 	h "github.com/6ixBit/v2-Personal-Website/handlers"
 	"github.com/prprprus/scheduler"
+	"fmt"
 	// "github.com/6ixBit/v2-Personal-Website/emails"
 )
 
@@ -18,7 +19,6 @@ func ScheduleTasks() {
 	}
 
 	// Update projects in cache every 3 hours
-	s.Every().Hour(3).Do(h.UpdateProjects)
-
-	// Send emails
+	jobID := s.Every().Minute(1).Do(h.UpdateProjects)
+	if jobID != "" { fmt.Println(jobID, "executed")}
 }

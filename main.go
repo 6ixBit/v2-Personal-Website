@@ -15,17 +15,16 @@ func init() {
 }
 
 func main() {
-	http.HandleFunc("/", mwr.LogRequests(handlers.HomeHandler))
-	http.HandleFunc("/contact", mwr.LogRequests(handlers.ContactHandler))
-	http.HandleFunc("/projects", mwr.LogRequests(handlers.ProjectsHandler))
+	http.HandleFunc("/api/cv", mwr.LogRequests(handlers.HomeHandler))
+	http.HandleFunc("/api/contact", mwr.LogRequests(handlers.ContactHandler))
+	http.HandleFunc("/api/projects", mwr.LogRequests(handlers.ProjectsHandler))
 
 	ScheduleTasks()
-	handlers.FetchProjects()
 	startServer()
 }
 
 func startServer() {
-	fmt.Println("Server up and running on port 8080..")
+	fmt.Println("Server up and running on port 8080...")
 	http.ListenAndServe(":8080", nil)
 }
 

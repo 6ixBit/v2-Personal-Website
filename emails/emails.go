@@ -14,7 +14,8 @@ type Email struct {
 	Body 			string
 }
 
-func (e *Email)	sendEmail() {
+// SendEmail to reciepient
+func (e *Email)	SendEmail() {
 	conn, err := smtp.Dial(e.SMTPServerAddr)
 	if err != nil { log.Println(err) }
 

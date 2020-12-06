@@ -40,7 +40,7 @@ func ContactHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	} 
 	
-	// Write succesful response to client
+	// Temporarily Write back POST req to client
 	w.WriteHeader(http.StatusOK)
 	if err := json.NewEncoder(w).Encode(incomingForm); err != nil {
 		log.Println("Failed to return response to client")
