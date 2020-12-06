@@ -6,7 +6,6 @@ import (
 	h "github.com/6ixBit/v2-Personal-Website/handlers"
 	"github.com/prprprus/scheduler"
 	"fmt"
-	// "github.com/6ixBit/v2-Personal-Website/emails"
 )
 
 // ScheduleTasks to be executed such as emailing

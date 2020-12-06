@@ -29,8 +29,8 @@ func (e *Email)	SendEmail() {
 
 	// Stream data to email writer
 	fmt.Fprintf(w, e.Body)
+	fmt.Println("Email succesfuly sent.")
 
-	// Close reader && connection
 	if err := w.Close(); err != nil { log.Println(err) }
 	if	err := conn.Close(); err != nil { log.Println(err)}
 }

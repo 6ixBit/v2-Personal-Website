@@ -5,6 +5,9 @@ import (
 	"net/http"
 	"encoding/json"
 	"log"
+	"os"
+
+	e "github.com/6ixBit/v2-Personal-Website/emails"
 )
 
 //ContactForm placeholder for incoming json form data
@@ -40,9 +43,24 @@ func ContactHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	} 
 	
-	// Temporarily Write back POST req to client
+	stub := prepareEmailConfig(incomingForm.Email, incomingForm.Message)
+	stub.SendEmail()
 	w.WriteHeader(http.StatusOK)
-	if err := json.NewEncoder(w).Encode(incomingForm); err != nil {
-		log.Println("Failed to return response to client")
-	}
 } 
+
+func prepareEmailConfig(sender, body string) e.Email {
+	srvAddr, _ := os.LookupEnv("SMTP_SERVER")
+	srvPort, _ := os.LookupEnv("SMTP_PORT")
+	recipient, _ := os.LookupEnv("SMTP_RECIPIENT")
+
+	server := srvAddr + ":" + srvPort
+
+	stub := e.Email{
+		server,
+		recipient,
+		sender,
+		body,
+	}
+
+	return stub
+}

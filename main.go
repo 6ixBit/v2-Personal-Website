@@ -15,9 +15,9 @@ func init() {
 }
 
 func main() {
-	http.HandleFunc("/api/cv", mwr.LogRequests(handlers.HomeHandler))
-	http.HandleFunc("/api/contact", mwr.LogRequests(handlers.ContactHandler))
-	http.HandleFunc("/api/projects", mwr.LogRequests(handlers.ProjectsHandler))
+	http.HandleFunc("/api/cv", 			mwr.LogRequests(handlers.HomeHandler))
+	http.HandleFunc("/api/contact", 	mwr.LogRequests(handlers.ContactHandler))
+	http.HandleFunc("/api/projects", 	mwr.LogRequests(handlers.ProjectsHandler))
 
 	ScheduleTasks()
 	startServer()
