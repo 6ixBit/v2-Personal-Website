@@ -20,7 +20,7 @@ var (
 type Projects struct {
 	Name 			string `json: "name"`
 	Svn_URL 		string `json: "svn_url"`
-	Description 	string `json: "description"`
+	Description 	string `json: "description, omitempty"`
 	Language 		string `json: "language"`
 }
 
