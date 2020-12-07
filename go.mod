@@ -7,4 +7,5 @@ require (
 	github.com/joho/godotenv v1.3.0
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/prprprus/scheduler v0.5.0
+	github.com/robfig/cron v1.2.0
 )

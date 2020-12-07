@@ -7,6 +7,7 @@ import (
 	"log"
 	"encoding/json"
 	"time"
+	"fmt"
 
 	cache "github.com/patrickmn/go-cache"
 )
@@ -62,7 +63,7 @@ func FetchProjects() {
 	if err != nil {	log.Println(ErrFailedToReadFromReader) }
 
 	err = json.Unmarshal(response, &repos)
-	setProjectsInCache(repos)			
+	setProjectsInCache(repos)
 
 	if err != nil { 
 		log.Println(ErrFailedToParseJSON)

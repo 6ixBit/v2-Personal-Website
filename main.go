@@ -13,7 +13,7 @@ import (
 func init() {
 	loadEnvFile()
 	go handlers.FetchProjects()
-	go ScheduleTasks()
+	ScheduleTasks()
 }
 
 func main() {
