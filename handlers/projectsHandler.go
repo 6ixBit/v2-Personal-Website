@@ -18,10 +18,10 @@ var (
 
 // Projects is a placeholder for response from GitHubs API
 type Projects struct {
-	Name 		string `json: "name"`
-	URL 		string `json: "svn_url"`
-	Description string `json: "description"`
-	Language 	string `json: "language"`
+	Name 			string `json: "name"`
+	Svn_URL 		string `json: "svn_url"`
+	Description 	string `json: "description"`
+	Language 		string `json: "language"`
 }
 
 // ProjectsHandler is responsbile for dealing with projects route

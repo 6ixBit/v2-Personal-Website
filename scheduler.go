@@ -18,6 +18,6 @@ func ScheduleTasks() {
 	}
 
 	// Update projects in cache every 6 hours
-	jobID := s.Every().Minute(2).Do(h.UpdateProjects)
+	jobID := s.Every().Hour(6).Do(h.UpdateProjects)
 	if jobID != "" { fmt.Println(jobID, "executed")}
 }
