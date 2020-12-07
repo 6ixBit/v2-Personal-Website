@@ -44,7 +44,7 @@ func ContactHandler(w http.ResponseWriter, r *http.Request) {
 	} 
 	
 	stub := prepareEmailConfig(incomingForm.Email, incomingForm.Message)
-	stub.SendEmail()
+	go stub.SendEmail()
 	w.WriteHeader(http.StatusOK)
 		// Write JSON on success
 } 

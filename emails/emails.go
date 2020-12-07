@@ -13,8 +13,6 @@ type Email struct {
 	Body 			string
 }
 
-
-
 // SendEmail to reciepient
 func (e *Email)	SendEmail() {
 	smtpHost,_  := os.LookupEnv("SMTP_SERVER")

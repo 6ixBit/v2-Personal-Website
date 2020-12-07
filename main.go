@@ -12,6 +12,8 @@ import (
 
 func init() {
 	loadEnvFile()
+	go handlers.FetchProjects()
+	go ScheduleTasks()
 }
 
 func main() {
@@ -19,7 +21,6 @@ func main() {
 	http.HandleFunc("/api/contact", 	mwr.LogRequests(handlers.ContactHandler))
 	http.HandleFunc("/api/projects", 	mwr.LogRequests(handlers.ProjectsHandler))
 
-	ScheduleTasks()
 	startServer()
 }
 

@@ -19,7 +19,7 @@ var (
 // Projects is a placeholder for response from GitHubs API
 type Projects struct {
 	Name 		string `json: "name"`
-	CloneURL 	string `json: "clone_url"`
+	URL 		string `json: "svn_url"`
 	Description string `json: "description"`
 	Language 	string `json: "language"`
 }
@@ -47,7 +47,6 @@ func ProjectsHandler(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-type", "application/json")
 		json.NewEncoder(w).Encode(Err500)
 	}
-	
 }
 
 // Fetches projects from GitHub API and writes response to addrss of repos global
