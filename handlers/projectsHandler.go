@@ -7,7 +7,6 @@ import (
 	"log"
 	"encoding/json"
 	"time"
-	"fmt"
 
 	cache "github.com/patrickmn/go-cache"
 )
@@ -82,5 +81,5 @@ func setProjectsInCache(r []Projects) {
 // UpdateProjects will fetch repos, write result to in memory struct, then set that value to cache.
 // Cache read is executed to respond to user request for repos.
 func UpdateProjects() {
-	FetchProjects()
+	go FetchProjects()
 }
