@@ -1,3 +1,0 @@
-20:0:46 - GET - [ /api/projects ] - %!s(MISSING) 
-20:1:27 - GET - [ /api/projects ] - %!s(MISSING) 
-20:2:0 - GET - [ /api/projects ] - %!s(MISSING) 
