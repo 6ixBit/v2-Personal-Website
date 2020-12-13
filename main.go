@@ -23,7 +23,8 @@ func main() {
 
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
- 	r.Use(middleware.Timeout(60 * time.Second)) // Set timeout for incoming requests
+	r.Use(middleware.Timeout(50 * time.Second)) // Set timeout for incoming requests
+	r.Use(middleware.Heartbeat("/api/status"))
 
 	r.Get("/api/cv", 	   h.HomeHandler)
 	r.Get("/api/projects", h.ProjectsHandler)

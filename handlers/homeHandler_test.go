@@ -1,11 +1,9 @@
-package tests
+package handlers
 
 import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	h "github.com/6ixBit/v2-Personal-Website/handlers"
 )
 
 func TestHomeHandler(t *testing.T) {
@@ -16,7 +14,7 @@ func TestHomeHandler(t *testing.T) {
 
 	// Response recorder to monitor test request.
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(h.HomeHandler)
+	handler := http.HandlerFunc(HomeHandler)
 	handler.ServeHTTP(rr, req) 	 					// Write to response recorder the test request
 
 	if rr.Code != http.StatusOK {
@@ -24,6 +22,6 @@ func TestHomeHandler(t *testing.T) {
 	}
 
 	if header := rr.Header().Get("Content-type"); header != "applicaton/pdf" {
-		t.Errorf("Wrong header type set received from server.")
+		t.Errorf("Wrong header type set received from server: %s", header)
 	}
 }
