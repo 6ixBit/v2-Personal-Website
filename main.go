@@ -14,7 +14,7 @@ import (
 
 func init() {
 	loadEnvFile()
-	go h.FetchProjects()
+	h.FetchProjects()
 	go ScheduleTasks()
 }
 
