@@ -1,10 +1,11 @@
 # v2-Personal-Website
-My personal website rewritten and updated in Golang
+My personal website rewritten from a full stack Python app to a Golang backend API
 
 ## Features
 - Request Logging
 - Concurrent email sending
 - Caching
+- Containerised
 ***
 
 ### Run

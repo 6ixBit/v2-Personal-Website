@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-api
+spec:
+  selector:
+    matchLabels:
+      app: backend-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: backend-api
+    spec:
+      containers:
+      - name: backend-api
+        image: 6ixbit/v2-personal-website-server:latest
+      restartPolicy: Always
+
