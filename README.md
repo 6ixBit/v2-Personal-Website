@@ -5,7 +5,10 @@ My personal website rewritten from a full stack Python app to a Golang backend A
 - Request Logging
 - Concurrent email sending
 - Caching
+- Rate limiting
+- Monitoring
 - Containerised
+- COnfigurable via environment
 ***
 
 ### Run
