@@ -16,4 +16,16 @@ spec:
       - name: backend-api
         image: 6ixbit/v2-personal-website-server:latest
       restartPolicy: Always
-
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: backend-api-service
+spec:
+    type: NodePort
+    selector:
+      app: backend-api
+    ports:
+      - nodePort: 30500
+        port: 8080
+        targetPort: 8080
