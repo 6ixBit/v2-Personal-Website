@@ -23,19 +23,30 @@ func init() {
 }
 
 func main() {	
+
+	router := setupRouter() 
+	startServer(router)
+	
+}
+
+
+func setupRouter() *chi.Mux {
 	r := chi.NewRouter()
 
+	// Middleware stack
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
+	r.Use(middleware.Recoverer)
 	r.Use(middleware.Timeout(50 * time.Second)) // Set timeout for incoming requests
 	r.Use(httprate.LimitByIP(30, 1*time.Minute))
 	r.Use(middleware.Heartbeat("/api/status"))
 
+	// Routes
 	r.Get("/api/cv", 	   h.HomeHandler)
 	r.Get("/api/projects", h.ProjectsHandler)
 	r.Post("/api/contact", h.ContactHandler)
-	
-	startServer(r)
+
+	return r
 }
 
 func startServer(r *chi.Mux) {
