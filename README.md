@@ -1,7 +1,7 @@
 # v2-Personal-Website
 My personal website rewritten from a full stack Python app to a Golang backend API
 
-## Features
+### Features
 - Request Logging
 - Concurrent email sending
 - Caching
@@ -18,10 +18,11 @@ My personal website rewritten from a full stack Python app to a Golang backend A
 - visit localhost:8080
 ***
 
-##### Docker container
+### Docker container
 - docker build -t mywebserver:latest .
 - docker run -p 8080:8080 mywebserver:latest
 - visit localhost:8080
+***
 
 ### Kubernetes access
 In order to use the kubernetes deployment and the service so that it can be accessed do the following;
