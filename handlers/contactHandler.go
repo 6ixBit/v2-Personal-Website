@@ -24,6 +24,8 @@ var (
 
 // ContactHandler is responsible for handling the contact route
 func ContactHandler(w http.ResponseWriter, r *http.Request) {	
+	AllowCORS(w)
+	
 	if r.Method != "POST" {
 		w.Header().Set("Content-type", "application/json")
 		w.WriteHeader(http.StatusMethodNotAllowed)

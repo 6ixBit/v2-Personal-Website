@@ -10,6 +10,8 @@ import (
 
 // HomeHandler -
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
+	AllowCORS(w)
+	
 	if r.Method != "GET" {
 		w.Header().Set("Content-type", "application/json")
 		w.WriteHeader(http.StatusMethodNotAllowed)

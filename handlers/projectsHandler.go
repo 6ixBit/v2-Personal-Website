@@ -26,6 +26,7 @@ type Projects struct {
 
 // ProjectsHandler is responsbile for dealing with projects route
 func ProjectsHandler(w http.ResponseWriter, r *http.Request) {
+	AllowCORS(w)
 
 	if r.Method != "GET" {
 		w.WriteHeader(http.StatusMethodNotAllowed)
@@ -83,3 +84,4 @@ func setProjectsInCache(r []Projects) {
 func UpdateProjects() {
 	go FetchProjects()
 }
+
